@@ -1,0 +1,29 @@
+
+{% extends 'movie_not_log_in_base.html' %}
+
+{% block page_title %}
+    Login
+{% endblock %}
+
+{% block page_content %}
+    <h1>Zaloguj się</h1>
+    <form method="POST">
+    {% csrf_token %}
+        {% for f in form %}
+            <div class="uk-margin">
+                    <label class="uk-form-label uk-text-bold uk-text-primary uk-text-right ">{{ f.label_tag }}</label>
+                    <div class="uk-form-controls">
+                            {{ f }}
+                    </div>
+
+
+            </div>
+
+        {% endfor %}
+
+    <button class="uk-button uk-button-default">Zaloguj</button>
+    <span>Jeżeli nie masz jeszcze konta
+        <a href="{% url 'register' %}">zarejestuj się</a>
+    </span>
+    </form>
+{% endblock %}

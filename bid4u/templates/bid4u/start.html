@@ -1,0 +1,44 @@
+{% extends 'movie_base.html' %}
+{% load static %}
+{% block Start %}
+	Start - instrukcja
+{% endblock %}
+
+{% block page_content %}
+<div class="uk-flex uk-flex-center">
+    <dl class="uk-description-list">
+    <dt>1. Rejestracja aplikacji na allegro:</dt>
+    <dd>Pierwszy krok jeśli już mamy konto na allegro to rejestrujemy aplikację/konto na allegro.</dd>
+        <dd>za pomocą której uzyskamy CLIENT ID oraz CLIENT SECRET.</dd>
+        <dd>Wypełniamy pole NAZWA APLIKACJI.</dd>
+        <dd>Ścieżka aplikacji: <span style="color: red">http://localhost:8000/bid4u</span></dd>
+        <dd>Poniżej przykład jak należy wypełnić formularz.</dd>
+        <ul class="uk-list uk-link-text">
+    <li><a style="color: orange" href="https://apps.developer.allegro.pl/new" target="_blank">Link do rejestacji aplikacji allegro</a></li>
+        </ul>
+
+     <img src="{% static 'images/01_rest_api.JPG' %}" alt="01" style="width: 800px; height: auto;">
+
+
+        <dt>Ustawiawy <b>Uprawnienia aplikacji</b> i klikamy ZAREJESTRUJ:</dt>
+        <br>
+        <img src="{% static 'images/02.JPG' %}" alt="01" style="width: 800px; height: auto;">
+
+
+
+
+        <dt>2. Wygenerowany CLIENT ID oraz CLIENT SERCRET:</dt>
+    <dd>Klikamy w SZCZEGÓŁY:</dd>
+       <img src="{% static 'images/03.JPG' %}" alt="01" style="width: 800px; height: auto;">
+
+
+    <dt>3. Przekazanie CLIENT ID oraz CLIENT SERCERT:</dt>
+    <dd>Należy oba klucze skopiować i wkleić do formularza w zakładce:</dd>
+    <dd>KONTO ALLEGRO</dd>
+        <img src="{% static 'images/04.JPG' %}" alt="01" style="width: 800px; height: auto;">
+
+ <dt>4. Zakładka TWOJE AUKCJE</dt>
+<dd>Jeśli zapisałeś już CLIENT ID oraz CLIENT SECRET możesz przejść do zakładki TWOJE AUKCJE</dd>
+   </dl>
+</div>
+{% endblock %}

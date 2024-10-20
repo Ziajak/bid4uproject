@@ -1,0 +1,95 @@
+{% extends 'movie_base.html' %}
+
+{% block page_title %}
+	Auctions
+{% endblock %}
+
+{% block page_content %}
+     <div class="uk-flex  uk-flex-center">
+      <dl class="uk-description-list">
+ <dt>UWAGA:</dt>
+    <dd>Zawsze przy zapisie aukcji sprawdzamy czy jesteś zalogowany do serwisu allegro.</dd>
+    <dd>Jeśli nie jesteś zalogowany zostaniesz przekierowany na stronę allegro aby zalogować się.</dd>
+    <dd>Jeśli jesteś zalogowany ale Twoja aplikacja nie została powiązana z Twoim kontem allegro to również zostaniesz przekierowany</dd>
+    <dd>i należy powiązać aplikacje.</dd>
+      </dl>
+  </div>
+    <form method="POST" class="uk-form-horizontal" >
+    {% csrf_token %}
+
+        {% for a in auctions_form %}
+            <div class="uk-margin">
+                    <label class="uk-form-label uk-text-bold uk-text-primary uk-text-right ">{{ a.label_tag }}</label>
+                    <div class="uk-form-controls">
+                            {{ a }}
+                         <div class="uk-text-danger uk-margin-small-top">
+                    {% for error in a.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+
+                </div>
+                    </div>
+
+
+
+            </div>
+
+        {% endfor %}
+
+
+
+    <button class="uk-button uk-button-default uk-align-center">
+        Zapisz
+    </button>
+
+
+</form>
+
+        <hr class="uk-margin uk-text-bold">
+
+
+
+<span class="uk-text-large uk-text-primary">Twoje zaplanowane aukcje:</span>
+
+    <table class="uk-table uk-table-divider">
+      <thead>
+        <tr>
+            <th>Link aukcji</th>
+
+            <th>Data złożenia oferty</th>
+
+            <th>Status</th>
+
+            <th>Kwota</th>
+{#            <th></th>#}
+
+        </tr>
+        </thead>
+             <tbody>
+                {% for l in list_auctions %}
+                    <tr>
+                        <td>{{ l.link }}</td>
+                        <td>{{ l.bid_date|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ l.status }}</td>
+                        <td>{{ l.amount }}</td>
+
+                    <td>
+                        <form method="POST" action="{% url 'delete_auctions' id=l.id %}">
+                            {% csrf_token %}
+                            <button class="uk-button uk-button-default uk-align-center">
+                                        Usuń
+                                        </button>
+                        </form>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+
+             </tbody>
+
+ </table>
+
+{% endblock %}

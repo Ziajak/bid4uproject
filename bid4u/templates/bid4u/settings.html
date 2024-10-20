@@ -1,0 +1,81 @@
+{% extends 'movie_base.html' %}
+
+{% block page_title %}
+	Settings - Allegro APP
+{% endblock %}
+
+{% block page_content %}
+
+
+{% if not settings %}
+
+
+    <form method="POST" class="uk-form-horizontal" >
+    {% csrf_token %}
+
+        <h4>Wprowadź ustawienia konta:</h4>
+        <div class="uk-margin">
+        {% for a in account_form %}
+
+
+                    <label class="uk-form-label uk-text-bold uk-text-primary uk-text-right ">{{ a.label_tag }}</label>
+                    <div class="uk-form-controls">
+                            {{ a }}
+                                             <div class="uk-text-danger uk-margin-small-top">
+                    {% for error in a.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+
+                </div>
+
+                    </div>
+
+            </div>
+
+        {% endfor %}
+
+
+
+    <button class="uk-button uk-button-default uk-align-center">
+        Zapisz
+    </button>
+</form>
+       <hr class="uk-margin-large-top">
+{% endif %}
+
+<br>
+        {% for s in settings %}
+            <div class="uk-flex uk-flex-center">
+<div class="uk-flex uk-flex-column">
+
+<h3 style="color: orange">Konto aplikacji:</h3>
+    <div style="color: red">Możesz posiadać tylko jedno konto</div>
+         <table class="uk-table uk-table-striped">
+
+    <tbody>
+        <tr>
+            <td>Client ID:</td>
+            <td>{{ s.client_id }}</td>
+
+        </tr>
+        <tr>
+            <td>Client Secret:</td>
+            <td>{{ s.client_secret }}</td>
+
+        </tr>
+
+
+
+    </tbody>
+</table>
+<form method="POST" action="{% url 'delete_account_allegro' id=s.id %}">
+                            {% csrf_token %}
+                            <button class="uk-button uk-button-default uk-align-center">
+                                        Usuń konto aplikacji
+                                        </button>
+                        </form>
+            </div>
+
+            </div>
+     {% endfor %}
+{% endblock %}
